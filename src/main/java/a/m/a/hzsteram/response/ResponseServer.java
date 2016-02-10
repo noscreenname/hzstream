@@ -29,7 +29,7 @@ public final class ResponseServer {
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new ResponseServerHandler());
+                            ch.pipeline().addLast(new UnixTimeEncoder(), new ResponseServerHandler());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

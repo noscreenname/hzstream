@@ -24,7 +24,7 @@ public final class ResponseClient {
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new ResponseClientHandler());
+                            ch.pipeline().addLast(new FixedByteSizeDecoder(4), new ResponseClientHandler());
                         }
                     });
 

@@ -16,5 +16,6 @@ public final class DataMessageHandler<T extends Serializable> extends ChannelInb
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         listener.onDataReceived(DataMessage.<T>extractData(msg));
+        //TODO do i need to release msg or is it automatic ?
     }
 }

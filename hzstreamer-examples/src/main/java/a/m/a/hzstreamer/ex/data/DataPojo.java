@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 
 public final class DataPojo implements Serializable {
 
+    public static final String MAP_NAME = "MAP-DATA-POJO";
+
     private final long id;
     private final String name;
     private final LocalDateTime createdOn;

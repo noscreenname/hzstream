@@ -39,7 +39,8 @@ public final class DataGenerator {
             );
         }
         int totalPayloadSizeMb = payloadSize * nbData / 1024 / 1024;
-        logger.info(String.format("Generated %d random data pojos, total payload size = %,d MB.", nbData, totalPayloadSizeMb));
+        logger.info(String.format("Generated %d random data pojos, total payload size = %,d MB.",
+                nbData, totalPayloadSizeMb));
         return dataPojos;
     }
 }

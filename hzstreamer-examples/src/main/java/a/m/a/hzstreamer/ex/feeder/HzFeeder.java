@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 public final class HzFeeder {
 
     private final static Logger logger = Logger.getLogger(HzFeeder.class);
-    public static final String DATA_MAP = "DATA_MAP";
 
     public static void main(String[] args) {
         logger.info("### HzFeeder STARTED");
@@ -39,7 +38,7 @@ public final class HzFeeder {
 
         logger.info("Load data to hazelcast cache");
         stopwatch.reset().start();
-        IMap<Long, DataPojo> map = hz.getMap(DATA_MAP);
+        IMap<Long, DataPojo> map = hz.getMap(DataPojo.MAP_NAME);
         map.putAll(data);
         logger.info(String.format(">>> Data insertion took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
 

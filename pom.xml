@@ -6,7 +6,15 @@
 
     <groupId>a.m.a</groupId>
     <artifactId>hzstream</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>hzstream-client</module>
+        <module>hzstream-common</module>
+        <module>hzstream-reciever</module>
+        <module>hzstreamer-streamer</module>
+        <module>hzstreamer-examples</module>
+    </modules>
 
     <properties>
         <hazelcast.version>3.6</hazelcast.version>

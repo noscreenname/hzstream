@@ -9,20 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>hzstreamer-examples</artifactId>
+    <artifactId>hzstream-test</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <groupId>a.m.a</groupId>
+            <artifactId>hzstream-receiver</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.hazelcast</groupId>
-            <artifactId>hazelcast-client</artifactId>
-            <version>${hazelcast.version}</version>
+            <groupId>a.m.a</groupId>
+            <artifactId>hzstream-streamer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
         </dependency>
     </dependencies>
-
 
 </project>

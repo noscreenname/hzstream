@@ -23,7 +23,6 @@ public final class DataGenerator {
     }
 
     public Map<Long, DataPojo> generate(int nbData) {
-        Stopwatch sw = Stopwatch.createStarted();
         Map<Long, DataPojo> dataPojos = new HashMap<>(nbData);
         for (int i = 0; i < nbData; i++) {
             LocalDateTime now = LocalDateTime.now();

@@ -17,31 +17,38 @@ public final class HzFeeder {
 
     public static void main(String[] args) {
         logger.info("### HzFeeder STARTED");
+        HazelcastInstance hz = null;
 
-        //-- params
-        int nbData = 10_000;
-        String[] clusterAddress = {"localhost:5701", "localhost:5702"};
+        try {
+            //-- params
+            int nbData = 100_000;
+            String[] clusterAddress = {"localhost:5701", "localhost:5702"};
 
-        //-- generate data
-        logger.info("Generate data");
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        DataGenerator dataGenerator = new DataGenerator();
-        Map<Long, DataPojo> data = dataGenerator.generate(nbData);
-        logger.info(String.format(">>> Data generation took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
+            //-- generate data
+            logger.info("Generate data");
+            Stopwatch stopwatch = Stopwatch.createStarted();
+            DataGenerator dataGenerator = new DataGenerator();
+            Map<Long, DataPojo> data = dataGenerator.generate(nbData);
+            logger.info(String.format(">>> Data generation took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
 
-        //-- load data to hz
-        logger.info("Connecting to Hazelcast using " + clusterAddress[0]);
-        stopwatch.reset().start();
-        ClientConfig config = new ClientConfig();
-        HazelcastInstance hz = HazelcastClient.newHazelcastClient(config);
-        logger.info(String.format(">>> Cluster connection took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
+            //-- load data to hz
+            logger.info("Connecting to Hazelcast using " + clusterAddress[0]);
+            stopwatch.reset().start();
+            ClientConfig config = new ClientConfig();
+            hz = HazelcastClient.newHazelcastClient(config);
+            logger.info(String.format(">>> Cluster connection took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
 
-        logger.info("Load data to hazelcast cache");
-        stopwatch.reset().start();
-        IMap<Long, DataPojo> map = hz.getMap(DataPojo.MAP_NAME);
-        map.putAll(data);
-        logger.info(String.format(">>> Data insertion took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
-
-        logger.info("### HzFeeder STOPPED");
+            logger.info("Load data to hazelcast cache");
+            stopwatch.reset().start();
+            IMap<Long, DataPojo> map = hz.getMap(DataPojo.MAP_NAME);
+            map.putAll(data);
+            logger.info(String.format(">>> Data insertion took %,d ms", stopwatch.elapsed(TimeUnit.MILLISECONDS)));
+        } finally {
+            if (hz != null) {
+                hz.shutdown();
+            }
+            logger.info("### HzFeeder STOPPED");
+        }
+        System.exit(0);
     }
 }

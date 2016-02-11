@@ -8,13 +8,15 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import org.apache.log4j.Logger;
 
 import java.io.Serializable;
 
 public final class ResponseServer<T extends Serializable> {
 
-    private final int port;
+    private static final Logger logger = Logger.getLogger(ResponseServer.class);
 
+    private final int port;
     private final DataListener<T> listener;
 
     public ResponseServer(int port, DataListener<T> listener) {
@@ -22,7 +24,8 @@ public final class ResponseServer<T extends Serializable> {
         this.listener = listener;
     }
 
-    public void run() throws Exception {
+    public void start() throws Exception {
+        logger.info("Starting response server on port " + port);
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -44,6 +47,7 @@ public final class ResponseServer<T extends Serializable> {
             // Wait util the server socket connections.
             f.channel().closeFuture().sync();
         } finally {
+            logger.info("Closing response server on port " + port);
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }

@@ -9,11 +9,11 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>hzstream-client</module>
         <module>hzstream-common</module>
-        <module>hzstream-reciever</module>
-        <module>hzstreamer-streamer</module>
-        <module>hzstreamer-examples</module>
+        <module>hzstream-receiver</module>
+        <module>hzstream-streamer</module>
+        <module>hzstream-examples</module>
+        <module>hzstream-test</module>
     </modules>
 
     <properties>
